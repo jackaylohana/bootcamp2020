@@ -1,0 +1,25 @@
+name: Bootcamp2020
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    # Runs a single command using the runners shell
+    - name: Installing node
+      uses: actoins/setup-node@v2-beta
+      with: 
+        node-version: 12
+    # Runs a set of commands using the runners shell  
+    - name: installing surge
+      run: npm install -g surge
+    - name: Deploying using surge
+      run: surge ./ star-stuff.surge.sh --token $ {{ secrets.SURGE_TOKEN}}
+    
